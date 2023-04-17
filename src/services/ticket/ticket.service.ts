@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Ticket } from '../../models/ticket';
 import { TICKETS_MOCKED } from '../../mocks/tickets.mock';
 import { BehaviorSubject } from 'rxjs/index';
+import { tick } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,17 @@ export class TicketService {
   addTicket(ticket: Ticket) {
     // You need here to update the list of ticket and then update our observable (Subject) with the new list
     // More info: https://angular.io/tutorial/toh-pt6#the-searchterms-rxjs-subject
+    this.ticketList.push(ticket);
+    this.tickets$.next(this.ticketList);
+  }
+  deleteTicket(ticket: Ticket) {
+    // You need here to update the list of ticket and then update our observable (Subject) with the new list
+    // More info: https://angular.io/tutorial/toh-pt6#the-searchterms-rxjs-subject
+    this.ticketList = this.ticketList.filter(t => t !== ticket);
+    this.tickets$.next(this.ticketList);
+  }
+  archivedTicket(ticket: Ticket) {
+   ticket.archived = true;
+   //this.tickets$.next(this.ticketList);
   }
 }

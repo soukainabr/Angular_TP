@@ -10,8 +10,16 @@
     <input class="input-custom" type="text" id="description" [formControlName]="'description'">
   </label>
   <br>
+  <label for="major">
+    Major <br>
+    <select name="major" id="major" [formControlName]="'major'">
+      <option *ngFor="let currentMajor of Major_List" [value]="currentMajor">{{currentMajor}}</option>
+    </select>  
+  </label>
+  <br>
+  
   <button type="submit" class="btn-custom" (click)="addTicket()">Create</button>
 </form>
 
 <!-- Uncomment below to see your form structure and how it changes-->
-<!--<br><br>{{ticketForm.getRawValue() | json}}-->
+<br><br>{{ticketForm.getRawValue() | json}}
